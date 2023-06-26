@@ -1,0 +1,19 @@
+version: '3'
+services:
+    php:
+        image: php:8.1-fpm
+        volumes:
+            - './:/var/www'
+    nginx:
+        image: nginx:latest
+        ports:
+            - 80:80
+        volumes:
+            - './:/var/www/'
+            - './docker/nginx/conf.d:/etc/nginx/conf.d'
+    mysql:
+        image: mysql:5.7
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD=true
+        ports:
+            - "3306:3306"
